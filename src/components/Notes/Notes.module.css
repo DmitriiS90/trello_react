@@ -1,0 +1,33 @@
+.notes {
+    border: 3px solid rgb(239, 247, 126);
+    border-radius: 5px;
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+.notes .noteForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    width: 80%;
+}
+.notes .noteForm input{
+    margin-right: 15px;
+    margin-bottom: 10px;
+    
+    height: 17px;
+}
+.notes .noteForm button{
+    margin-bottom: 10px;
+    height: 23px;
+}
+.listItem{
+    list-style-type: decimal;
+}
+.listItem:hover {
+    background-color: rgb(244, 245, 174);
+    border-radius: 10px;
+}

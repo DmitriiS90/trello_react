@@ -1,0 +1,42 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 1rem;
+  width: 500px;
+  border: 3px solid rgb(13, 161, 230);
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.main h1 {
+  margin: 0;
+  margin-bottom: 5px;
+  
+}
+
+.input {
+  margin-bottom: 1rem;
+}
+
+.input input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 8px;
+  width: 400px;
+}
+
+.buttons {
+  width: 400px;
+  display: flex;
+  justify-content: space-around;
+  background-repeat: no-repeat;
+}
+/* .buttons .btn {
+  width: 59px;
+  height: 50px;
+  background-image: url(https://www.pngkit.com/png/detail/4-47714_blue-plus-sign-png-banner-download-blue-plus.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
