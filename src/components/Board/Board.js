@@ -14,14 +14,11 @@ const Board = () => {
     const idBoard = useSelector((state) => { return state.boardList.idBoard })
 
     const currentBoard = boards.find(b => b.id === idBoard)
-    //console.log("ID: " + idBoard)
-
 
     const [note, setNote] = useState()
 
     useEffect(() => {
         if (note) {
-            //console.log(note.notesName)
             dispatch(addNotes({ id: Date.now(), name: note.notesName, list: [] }))
         }
     }, [note])
@@ -35,7 +32,6 @@ const Board = () => {
                     initialValues={{
                         notesName: ''
                     }}
-                    //validationSchema={Validation}
                     onSubmit={values => { setNote(values) }}>
                     <Form>
                         <h3>Создать новый список</h3>
@@ -46,8 +42,6 @@ const Board = () => {
                     </Form>
                 </Formik>
             </div>
-
-            {/* {!currentBoard.notes.length && <div>Нет списков</div>} */}
 
             {currentBoard.notes.length > 0 &&
                 currentBoard.notes.map(n => <Notes key={n.id} idNote={n.id} name={n.name} list={n.list} />)

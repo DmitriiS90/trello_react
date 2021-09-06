@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { Formik, Form, Field } from "formik"
-import { addListItem } from '../../store/boardList-reducer';
+import { addListItem, dragListItem } from '../../store/boardList-reducer';
 import { useEffect, useState } from 'react';
 import styles from './Notes.module.css'
 
@@ -8,6 +8,7 @@ const Notes = ({ idNote, name, list }) => {
     const dispatch = useDispatch()
 
     const [item, setItem] = useState('')
+    const [currentList, setCurrentList] = useState([])
 
     useEffect(() => {
         if (item) {
@@ -15,24 +16,66 @@ const Notes = ({ idNote, name, list }) => {
         }
     }, [item])
 
+    useEffect(() => {
+        if (currentList.length > 0) {
+            dispatch(dragListItem( idNote, currentList ))
+        }
+    }, [currentList])
+
+    function dragStartHandler(e, l) {
+        setCurrentList(l)
+    }
+
+    function dragEndHandler(e) {
+        e.target.style.background = 'white'
+    }
+
+    function dragOverHandler(e) {
+        e.preventDefault()
+        e.target.style.background = 'rgb(239, 247, 126)'
+
+    }
+
+    function dropHandler(e, l) {
+        e.preventDefault()
+        setCurrentList(list.map(list => {          
+            if (list.id === l.id) {
+                return { ...list, order: currentList.order }
+            }
+            if (list.id === currentList.id) {
+                return { ...list, order: l.order }
+            }
+            return list
+        }))
+        e.target.style.background = 'white'
+    }
+    
+    function sortListItem(a, b) {
+        if (a.order > b.order) {
+            return 1
+        } else {
+            return -1
+        }
+    }
+
     return (
         <div className={styles.notes}>
             <h3>Название списка: {name}</h3>
 
             {list.length > 0 &&
                 <div>
-                    {list.map((l) =>
+                    {list.sort(sortListItem).map(l =>
                         <li
-                            onDragStart={(e) => { }}
-                            onDragLeave={(e) => { }}
-                            onDragEnd={(e) => { }}
-                            onDragOver={(e) => { }}
-                            onDrop={(e) => { }}
+                            onDragStart={(e) => { dragStartHandler(e, l) }}
+                            onDragLeave={(e) => { dragEndHandler(e) }}
+                            onDragEnd={(e) => { dragEndHandler(e) }}
+                            onDragOver={(e) => { dragOverHandler(e) }}
+                            onDrop={(e) => { dropHandler(e, l) }}
                             draggable={true}
-                            key={l}
+                            key={l.id}
                             className={styles.listItem}
                         >
-                            {l}
+                            {l.item}
                         </li>
                     )}
                 </div>}

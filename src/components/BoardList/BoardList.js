@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { setId } from '../../store/boardList-reducer';
+import { setIdBoard } from '../../store/boardList-reducer';
 import styles from './BoardList.module.css';
 
 const BoardList = () => {
@@ -9,9 +9,8 @@ const BoardList = () => {
     const history = useHistory()
 
     const openBoard = (id) => {
-        dispatch(setId(id))
+        dispatch(setIdBoard(id))
         history.push("/myboard")
-        //console.log(id)
     }
     return (
         <div className={styles.list}>

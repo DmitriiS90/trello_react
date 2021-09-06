@@ -33,7 +33,6 @@ const AddBoard = () => {
                         </div>
 
                         <div className={styles.buttons}>
-                            {/* <button className={styles.btn} type="submit"></button> */}
                             <button type="submit">Сохранить</button>
                         </div>
                     </Form>
