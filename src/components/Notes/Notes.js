@@ -1,4 +1,4 @@
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from "formik"
 import { addListItem, dragListItem } from '../../store/boardList-reducer';
 import { useEffect, useState } from 'react';
@@ -38,18 +38,17 @@ const Notes = ({ idNote, name, list }) => {
 
     function dropHandler(e, l) {
         e.preventDefault()
-        setCurrentList(list.map(list => {          
-            if (list.id === l.id) {
-                return { ...list, order: currentList.order }
+        setCurrentList(list.map(li => {          
+            if (li.id === l.id) {
+                return { ...li, order: currentList.order }
             }
-            if (list.id === currentList.id) {
-                return { ...list, order: l.order }
+            if (li.id === currentList.id) {
+                return { ...li, order: l.order }
             }
-            return list
+            return li
         }))
         e.target.style.background = 'white'
     }
-    
     function sortListItem(a, b) {
         if (a.order > b.order) {
             return 1
@@ -57,6 +56,7 @@ const Notes = ({ idNote, name, list }) => {
             return -1
         }
     }
+
 
     return (
         <div className={styles.notes}>

@@ -38,7 +38,6 @@ const boardListReducer = (state = initialState, action) => {
             const board = state.boards.find(b => b.id === state.idBoard)
             const note = board.notes.find(n => n.id === action.idNote)
             note.list = [...action.list]
-            debugger
             return {
                 ...state,
                 boards: [...state.boards.filter(b => b.id !== state.idBoard), board]
