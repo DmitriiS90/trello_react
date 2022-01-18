@@ -5,8 +5,9 @@ const reducers = combineReducers({
     boardList: boardListReducer
 })
 
-const store = createStore(reducers)
+type reducerType = typeof reducers
+export type AppStateType = ReturnType<reducerType>
 
-window.store = store
+const store = createStore(reducers)
 
 export default store

@@ -1,16 +1,21 @@
 import { Formik, Form, Field } from 'formik';
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux';
 import { addBoard } from '../../store/boardList-reducer';
+import { AppStateType } from '../../store/store';
 import styles from './AddBoard.module.css';
+
+type formValues = {
+    name: string
+}
 
 const AddBoard = () => {
     const dispatch = useDispatch()
-    const boards = useSelector((state) => { return state.boardList.boards })
+    const boards = useSelector((state: AppStateType) => { return state.boardList.boards })
     const [form, setForm] = useState(false)
 
     console.log(boards)
-    const addNewBoard = (values) => {
+    const addNewBoard = (values: formValues) => {
         dispatch(addBoard({ id: Date.now(), name: values.name, notes: [] }))
     }
 
@@ -25,7 +30,6 @@ const AddBoard = () => {
                     //validationSchema={Validation}
                     onSubmit={values => { addNewBoard(values) }}>
                     <Form>
-
                         <div>
                             <div className={styles.input}>
                                 <Field name='name' type="text" placeholder="Название доски" />

@@ -6,11 +6,11 @@ const DRAG_LIST_ITEM = 'DRAG_LIST_ITEM'
 
 
 let initialState = {
-    boards: [],
+    boards: [] as any,
     idBoard: null
 }
 
-const boardListReducer = (state = initialState, action) => {
+const boardListReducer = (state = initialState, action:any) => {
     switch (action.type) {
         case ADD_BOARD:
             return {
@@ -18,29 +18,29 @@ const boardListReducer = (state = initialState, action) => {
                 boards: [...state.boards, action.newBoard]
             }
         case ADD_NOTES: {
-            const board = state.boards.find(b => b.id === state.idBoard)
+            const board:any = state.boards.find((b:any) => b.id === state.idBoard)
             board.notes.push(action.note)
             return {
                 ...state,
-                boards: [...state.boards.filter(b => b.id !== state.idBoard), board]
+                boards: [...state.boards.filter((b:any) => b.id !== state.idBoard), board]
             }
         }
         case ADD_LIST_ITEM: {
-            const board = state.boards.find(b => b.id === state.idBoard)
-            const note = board.notes.find(n => n.id === action.idNote)
+            const board:any = state.boards.find((b:any) => b.id === state.idBoard)
+            const note = board.notes.find((n:any) => n.id === action.idNote)
             note.list.push({ id: note.list.length + 1, order: note.list.length + 1, item: action.item })
             return {
                 ...state,
-                boards: [...state.boards.filter(b => b.id !== state.idBoard), board]
+                boards: [...state.boards.filter((b:any) => b.id !== state.idBoard), board]
             }
         }
         case DRAG_LIST_ITEM: {
-            const board = state.boards.find(b => b.id === state.idBoard)
-            const note = board.notes.find(n => n.id === action.idNote)
+            const board:any = state.boards.find((b:any) => b.id === state.idBoard)
+            const note = board.notes.find((n:any) => n.id === action.idNote)
             note.list = [...action.list]
             return {
                 ...state,
-                boards: [...state.boards.filter(b => b.id !== state.idBoard), board]
+                boards: [...state.boards.filter((b:any) => b.id !== state.idBoard), board]
             }
         }
         case SET_ID_BOARD:
@@ -53,23 +53,23 @@ const boardListReducer = (state = initialState, action) => {
     }
 }
 
-export const addBoard = (newBoard) => {
+export const addBoard = (newBoard:any) => {
     return { type: ADD_BOARD, newBoard }
 }
 
-export const addNotes = (note) => {
+export const addNotes = (note:any) => {
     return { type: ADD_NOTES, note }
 }
 
-export const addListItem = ({ idNote, item }) => {
+export const addListItem = ({ idNote, item }:any) => {
     return { type: ADD_LIST_ITEM, idNote, item }
 }
-export const dragListItem = ( idNote, list ) => {
+export const dragListItem = ( idNote:any, list:any ) => {
     return { type: DRAG_LIST_ITEM, idNote, list}
 }
 
-export const setIdBoard = (id) => {
+export const setIdBoard = (id:any) => {
     return { type: SET_ID_BOARD, id }
 }
 
-export default boardListReducer
+export default boardListReducer;

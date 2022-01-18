@@ -8,4 +8,4 @@ const SmileButton = () => {
     )
 }
 
-export default SmileButton
+export default SmileButton;
